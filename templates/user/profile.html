@@ -1,0 +1,69 @@
+{% extends "common/side_bar.html" %}
+{% block header %}
+    <link rel="stylesheet" href="/static/css/profile.css">
+{% endblock %}
+{% block content %}
+    <div id="content">
+      <div class="panel">
+        <div class="header">
+          <span class="col_fade">最近创建的话题</span>
+        </div>
+      {% for topic in topics %}
+        <div class="cell">
+
+          <a class="user_avatar pull-left" href="{{ url_for('index.user_detail', id=user.id) }}">
+            <img src="{{ user.avatar }}" title="{{ user.username }}" alt="123">
+          </a>
+
+          <span class="reply_count pull-left">
+            <span class="count_of_replies" title="回复数">0</span>
+            <span class="count_seperator">/</span>
+            <span class="count_of_visits" title="点击数">{{ topic.views }}</span>
+          </span>
+          <span class="last_time pull-right">
+            <span class="last_active_time">{{ topic.created_time | last_active_time }}</span>
+          </span>
+
+
+          <div class="topic_title_wrapper">
+            <a class="topic_title" href="{{ url_for('py_topic.detail', id=topic.id) }}">
+              {{ topic.title }}
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+
+      <div class="panel">
+        <div class="header">
+          <span class="col_fade">最近参与的话题</span>
+        </div>
+
+         {% for topic in re_topics %}
+        <div class="cell">
+
+          <a class="user_avatar pull-left" href="{{ url_for('index.user_detail', id=user.id) }}">
+            <img src="{{ user.avatar }}" title="{{ user.username }}" alt="123">
+          </a>
+
+          <span class="reply_count pull-left">
+            <span class="count_of_replies" title="回复数">0</span>
+            <span class="count_seperator">/</span>
+            <span class="count_of_visits" title="点击数">{{ topic.views }}</span>
+          </span>
+          <span class="last_time pull-right">
+            <span class="last_active_time">{{ topic.reply_of_user(user.id).created_time | last_active_time }}</span>
+          </span>
+
+
+          <div class="topic_title_wrapper">
+            <a class="topic_title" href="{{ url_for('py_topic.detail', id=topic.id) }}">
+              {{ topic.title }}
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+
+      </div>
+        </div>
+{% endblock %}

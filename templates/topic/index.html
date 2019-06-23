@@ -1,0 +1,46 @@
+{% extends "common/side_bar.html" %}
+{% block header %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+{% endblock %}
+{% block content %}
+<body>
+        <div id="content">
+            <div class="panel">
+                <div class="header">
+                    <a href="{{ url_for('py_topic.index') }}" class="topic-tab current-tab">
+                        全部的帖子
+                    </a>
+
+                    {% for b in boards %}
+                    <a href="{{ url_for('py_topic.index', board_id=b.id) }}" class="topic-tab current-tab">
+                        {{ b.title }}
+                    </a>
+                    {% endfor %}
+                    <a href="{{ url_for('py_topic.view_board') }}" class="topic-tab current-tab" style="float:right;">
+                        添加板块
+                    </a>
+                </div>
+                <div class="inner post">
+                    <div class="topic_list">
+                        {% for t in topics %}
+                        <div class="cell">
+                            <div class="topic_title_wrapper">
+                                <a class="topic_title" href="{{ url_for('py_topic.detail', id=t.id) }}">
+                                    {{ t.title }}
+                                </a>
+                                <span>{{ t.replies() | count }} / {{ t.views }}</span>
+                                {# count(t.replies()) #}
+                                {# <span>{{ t.reply_count() }} / {{ t.views }}</span> #}
+                                {#len(Reply.all(topic_id=t.id))#}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+<!--<script src="/static/js/test11.js"></script>-->
+{% endblock %}
