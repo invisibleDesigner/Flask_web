@@ -5,8 +5,6 @@ misc
 mirror.sh
 output.png
 output1.png
-pyForum.conf
-pyForum.nginx
 test.sh
 ubuntu-bionic-18.04-cloudimg-console.log
 user_detail.pstat

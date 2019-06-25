@@ -1,0 +1,15 @@
+server {
+    listen 80;
+
+    location /images {
+        alias /var/www/pyForum/static/img;
+    }
+
+    location /static {
+        alias /var/www/pyForum/static;
+    }
+
+    location / {
+        proxy_pass http://localhost:5000;
+    }
+}
